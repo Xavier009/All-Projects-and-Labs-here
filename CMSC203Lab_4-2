@@ -1,0 +1,69 @@
+/**
+ * *The purpose of this class is to model a television
+ * @author Xavier 9/19/2020
+ *
+ */
+
+public class Television {
+private
+
+	String MANUFACTURER; //TV manufacturer (constant)
+	int SCREEN_SIZE; //TV screen size (also constant)
+	static boolean powerOn; //TV power on? (True or false)
+	int channel; //TV current channel
+	 int volume = 20; //TV current volume
+	
+	
+	
+	
+	
+	
+	
+	public Television(String brand, int size) {
+	MANUFACTURER = brand;
+	SCREEN_SIZE = size;
+	}
+
+    public void increaseVolume() {
+		volume++;
+	}
+	
+	  void decreaseVolume() {
+		 volume--;
+		
+	}
+	
+	  void power() {
+		powerOn = !powerOn;
+	}
+	
+	
+	
+	 int getChannel() {
+		return channel;
+	}
+	
+	 void setChannel(int newChannel) {
+		 channel = newChannel;
+	 }
+	 
+	 
+	 int getVolume() {
+		return volume;
+	}
+	
+	 void setVolume(int newVolume) {
+		 volume = newVolume;
+	 }
+	 
+	 
+	 int getScreenSize(){
+		return SCREEN_SIZE;
+	}
+	
+	
+	String getManufacturer() {
+		return MANUFACTURER;
+	}
+	
+}
