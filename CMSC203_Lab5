@@ -1,0 +1,149 @@
+import java.util.Scanner;
+
+public class RandomNumberGuesser {
+	public static void main(String[] args) {
+		
+		System.out.println("Welcome to the Random Number Guesser");
+		
+		String playAgain;
+		String message = "Your number of guesses is: ";
+		int currentGuess;
+		int acquiredNumber;
+		
+		
+		Scanner scan = new Scanner (System.in);
+		RNG random = new RNG();
+		
+		
+		do {//Loop for if you want to play again 
+			
+			int highBound = 99;
+			int lowBound = 0;
+			int numberOfGuesses = 1;
+			acquiredNumber = random.rand();
+			//Above must be reset each time
+			
+		
+		
+		System.out.println("Programmer note: The random number is " + acquiredNumber);
+		System.out.println("Enter your First Guess between " + lowBound + " and " + highBound + ": ");//ask and take the users first guess
+		
+		
+		
+		do {//for 7 guesses
+		
+		currentGuess = scan.nextInt();
+		System.out.println(message + numberOfGuesses);
+		numberOfGuesses++; //increments number of guesses each time
+		
+		
+		while(random.inputValidation(currentGuess, lowBound, highBound) == false) 
+		{
+			System.out.println("Re-Enter your First Guess between " + lowBound + " and " + highBound + ":");
+			currentGuess = scan.nextInt();
+			//random.inputValidation(currentGuess, lowBound, highBound);
+		}
+		
+		
+		if (guessStatus(currentGuess, acquiredNumber))
+		{
+			//If the guess was right, break out of the do-while loop (the 7 guesses one)
+			break;
+		}
+
+		if (numberOfGuesses > 7)//If this incremented value is above 7 then you have exhausted your 7 guesses and lose
+		{
+			System.out.println("You did not seem to guess the right number :(");
+			System.out.println("The correct number was: " + acquiredNumber);
+			break;
+			
+		}
+	
+		
+		
+		
+		
+		
+		
+		System.out.println(lowOrHigh(currentGuess, acquiredNumber));//Prints if the guess was too Low or High
+		if (higherThanGuess(currentGuess, acquiredNumber))//Similar to the function above, but instead returns t or f value
+		{
+			highBound = currentGuess; //If true and the guess was higher, assign the upper bound the value of user guess
+		}
+		if (higherThanGuess(currentGuess, acquiredNumber) == false)
+		{
+			lowBound = currentGuess; //If false, assign Lower bound the value or user guess
+		}
+		
+		
+		
+		
+		System.out.println("Enter your next Guess between " + lowBound + " and " + highBound + ": ");
+		//low and high bounds are now the new correct values
+		//This will loop and the values will keep updating for 7 guesses.
+		
+		
+		
+		}while(numberOfGuesses <= 7);
+		
+		
+		System.out.println("play agan?(enter \"yes\" or \"no\"): " );
+		scan.nextLine();//consume next line
+		playAgain = scan.nextLine();
+		
+		
+		}while (playAgain.equalsIgnoreCase("yes"));
+		
+		System.out.println("Thank you for playing. . .  " );
+		scan.close();
+		System.exit(0);
+		
+	}
+		
+	
+	
+	
+	
+		public static boolean guessStatus(int guess, int answer)//function that returns whether or not the users guess was correct
+		{
+			if(guess == answer)
+			{
+				System.out.println("Congratulations, you guessed correctly");
+				return true;
+			}
+		
+			return false;
+		}
+		
+		
+		public static boolean higherThanGuess(int guess, int answer)//function that returns if the guess was higher than the random number
+		{
+			if (guess > answer) 
+			{
+				return true;
+			}
+			return false;
+	
+		}
+		
+		
+		
+		public static String lowOrHigh(int guess, int answer)//Function returns a message if the guess was too low or too high
+		{
+			if (guess > answer) 
+			{
+				String high = "Incorrect, it seems your guess was too high";
+				return high;
+			}
+			if (guess < answer)
+			{
+				String low = "Incorrect, it seems your guess was too low";
+				return low;
+			}
+			return null;
+		}
+		
+		
+	}
+	
+	
